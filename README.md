@@ -1,54 +1,58 @@
-# xgh-benchmark
 
+# 🚀 xgh-benchmark
 
-# compile c
+Um comparativo simples de desempenho entre diferentes linguagens de programação calculando números primos até 100.000.000.
+
+---
+
+## 🛠️ Como compilar e executar os testes
+
+### 🖥️ **C**
+```bash
 gcc -o test-c test-c.c -lm
-
 ./test-c
+```
 
-
-# compilar rust
+### ⚙️ **Rust**
+```bash
 rustc test-rs.rs
 ./test-rs
+```
 
-# compilar c++
+### 🖥️ **C++**
+```bash
 g++ -o test-cpp test-cpp.cpp
-
 ./test-cpp
+```
 
-# compilar go
+### 🌟 **Go**
+```bash
 go build test-go.go
 ./test-go
+```
 
+---
 
-# 1 go 
-Quantidade de números primos até 100000000: 5761455
-Tempo de execução: 936 milissegundos
+## 📊 Resultados de desempenho
 
-# 2 java
-Quantidade de números primos até 100000000: 5761455
-Tempo de execução: 950 milissegundos
+| 🏆 **Posição** | 💻 **Linguagem** | 🔢 **Quantidade de primos** | ⏱️ **Tempo de execução**       |
+|----------------|-----------------|-----------------------------|--------------------------------|
+| 🥇 **1º**      | Go              | 5.761.455                  | **936 ms**                   |
+| 🥈 **2º**      | Java            | 5.761.455                  | **950 ms**                   |
+| 🥉 **3º**      | C               | 5.761.455                  | **1.070,51 ms**              |
+| 4º             | Rust            | 5.761.455                  | **7.760 ms**                 |
+| 5º             | C++             | 5.761.455                  | **9.110 ms**                 |
+| 6º             | Ruby            | 5.761.455                  | **13.727,47 ms**             |
+| 7º             | Python          | 5.761.455                  | **19.760,35 ms**             |
+| ❌ **Erro**    | JavaScript      | -                          | **Heap out of memory** 🛑    |
 
-# 3 c
-Quantidade de números primos até 100000000: 5761455
-Tempo de execução: 1070.51 milissegundos
+---
 
-# 4 rust
-Quantidade de números primos até 100000000: 5761455
-Tempo de execução: 7760 milissegundos
+## 📝 Observações
+- JavaScript enfrentou um problema de limite de memória no cálculo de números primos.
+- ⚡ Go se destacou como a linguagem mais rápida neste benchmark.
+- 💡 Rust e C++ apresentaram tempos mais altos comparados a C e Go.
 
-# 5 c++
-Quantidade de números primos até 100000000: 5761455
-Tempo de execução: 9110 milissegundos
+---
 
-# 6 ruby
-Quantidade de números primos até 100000000: 5761455
-Tempo de execução: 13727.466208016267 milissegundos
-
-# 7 python
-Quantidade de números primos até 100000000: 5761455
-Tempo de execução: 19760.345220565796 milissegundos
-
-
-# 999999 javascript
-FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+✨ **Contribuições são bem-vindas!** Caso deseje adicionar mais linguagens ou otimizações, sinta-se à vontade para fazer um PR.  
