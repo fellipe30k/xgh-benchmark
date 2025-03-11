@@ -49,9 +49,12 @@ go build test-go.go
 ---
 
 ## 📝 Observações
-- JavaScript enfrentou um problema de limite de memória no cálculo de números primos.
-- ⚡ Go se destacou como a linguagem mais rápida neste benchmark.
-- 💡 Rust e C++ apresentaram tempos mais altos comparados a C e Go.
+- 🛑 JavaScript enfrentou um problema de limite de memória e não conseguiu concluir o cálculo de números primos.
+- ⚡ Rust foi a linguagem mais rápida neste benchmark, superando as demais.
+- 🚀 Go e Java tiveram desempenhos próximos, com Go ligeiramente mais rápido.
+- 🔧 C apresentou um tempo um pouco maior que Go e Java, mas ainda competitivo.
+ -🧐 C++ teve um desempenho inesperadamente pior, possivelmente devido a otimizações ou abordagem utilizada no código. (Refactor??)
+- 🐢 Ruby e Python foram significativamente mais lentos, refletindo suas características interpretadas.
 
 ---
 
