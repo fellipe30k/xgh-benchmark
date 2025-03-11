@@ -15,7 +15,7 @@ gcc -o test-c test-c.c -lm
 
 ### ⚙️ **Rust**
 ```bash
-rustc test-rs.rs
+rustc -O test-rs.rs
 ./test-rs
 ```
 
