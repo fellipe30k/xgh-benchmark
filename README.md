@@ -53,7 +53,7 @@ go build test-go.go
 - ⚡ Rust foi a linguagem mais rápida neste benchmark, superando as demais.
 - 🚀 Go e Java tiveram desempenhos próximos, com Go ligeiramente mais rápido.
 - 🔧 C apresentou um tempo um pouco maior que Go e Java, mas ainda competitivo.
- -🧐 C++ teve um desempenho inesperadamente pior, possivelmente devido a otimizações ou abordagem utilizada no código. (Refactor??)
+- 🧐 C++ teve um desempenho inesperadamente pior, possivelmente devido a otimizações ou abordagem utilizada no código. (Refactor??)
 - 🐢 Ruby e Python foram significativamente mais lentos, refletindo suas características interpretadas.
 
 ---
