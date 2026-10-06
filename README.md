@@ -9,13 +9,13 @@ Um comparativo simples de desempenho entre diferentes linguagens de programaçã
 
 ### 🖥️ **C**
 ```bash
-gcc -o test-c test-c.c -lm
+gcc -O3 -o test-c test-c.c
 ./test-c
 ```
 
 ### ⚙️ **Rust**
 ```bash
-rustc -O test-rs.rs
+rustc -C opt-level=3 test-rs.rs
 ./test-rs
 ```
 
@@ -31,30 +31,70 @@ go build test-go.go
 ./test-go
 ```
 
+### ☕ **Java**
+```bash
+cp test-java.java Primes.java
+java Primes.java
+```
+
+### 🟨 **JavaScript**
+```bash
+node test-js.js
+```
+
+### 🐍 **Python**
+```bash
+python3 test-py.py
+```
+
+### 💎 **Ruby**
+```bash
+ruby --yjit test-rb.rb
+```
+
+---
+
+## 💻 Máquina de teste
+
+| Componente | Especificação |
+|---|---|
+| **CPU** | AMD Ryzen 5 3600 (6 núcleos / 12 threads, até 4,2 GHz, 32 MiB L3) |
+| **RAM** | 32 GB |
+| **SO** | Debian GNU/Linux 12 (bookworm), kernel 6.12.95 |
+| **C / C++** | GCC 12.2.0 |
+| **Rust** | rustc 1.92.0 |
+| **Go** | go 1.24.5 |
+| **Java** | OpenJDK 17.0.19 |
+| **JavaScript** | Node.js 21.7.3 |
+| **Ruby** | Ruby 4.0.6 (YJIT) |
+| **Python** | CPython 3.11.2 |
+
 ---
 
 ## 📊 Resultados de desempenho
 
-| 🏆 **Posição** | 💻 **Linguagem** | 🔢 **Quantidade de primos** | ⏱️ **Tempo de execução**       |
-|----------------|-----------------|-----------------------------|--------------------------------|
-| 🥇 **1º**      | Rust            | 5.761.455                  | **765 ms**                 |
-| 🥈 **2º**      | Go              | 5.761.455                  | **936 ms**                   |
-| 🥉 **3º**      | Java            | 5.761.455                  | **950 ms**                   |
-| 4º             | C               | 5.761.455                  | **1.070,51 ms**              |
-| 5º             | C++             | 5.761.455                  | **9.110 ms**                 |
-| 6º             | Ruby            | 5.761.455                  | **13.727,47 ms**             |
-| 7º             | Python          | 5.761.455                  | **19.760,35 ms**             |
-| ❌ **Erro**    | JavaScript      | -                          | **Heap out of memory** 🛑    |
+Cada linguagem foi executada 3 vezes; o valor mostrado é a mediana. O tempo mede apenas o crivo (sem alocação e sem contagem).
+
+| 🏆 **Posição** | 💻 **Linguagem** | 🔢 **Quantidade de primos** | ⏱️ **Tempo de execução** |
+|----------------|-----------------|-----------------------------|--------------------------|
+| 🥇 **1º**      | Go              | 5.761.455                  | **572,25 ms**            |
+| 🥈 **2º**      | Rust            | 5.761.455                  | **591,10 ms**            |
+| 🥉 **3º**      | Java            | 5.761.455                  | **592 ms**               |
+| 4º             | C               | 5.761.455                  | **593,95 ms**            |
+| 5º             | JavaScript      | 5.761.455                  | **1.146 ms**             |
+| 6º             | C++             | 5.761.455                  | **6.326 ms**             |
+| 7º             | Ruby            | 5.761.455                  | **6.583,97 ms**          |
+| 8º             | Python          | 5.761.455                  | **17.696,72 ms**         |
 
 ---
 
 ## 📝 Observações
-- 🛑 JavaScript enfrentou um problema de limite de memória e não conseguiu concluir o cálculo de números primos.
-- ⚡ Rust foi a linguagem mais rápida neste benchmark, superando as demais.
-- 🚀 Go e Java tiveram desempenhos próximos, com Go ligeiramente mais rápido.
-- 🔧 C apresentou um tempo um pouco maior que Go e Java, mas ainda competitivo.
-- 🧐 C++ teve um desempenho inesperadamente pior, possivelmente devido a otimizações ou abordagem utilizada no código. (Refactor??)
-- 🐢 Ruby e Python foram significativamente mais lentos, refletindo suas características interpretadas.
+- ⚖️ Go, Rust, Java e C ficaram em **empate técnico** (diferença menor que 4%, dentro da variação entre execuções). Nesse ponto o gargalo é o acesso à memória (cache misses), não a linguagem.
+- 🔧 C saiu de ~1.100 ms para ~590 ms: antes era compilado **sem otimização** (`-O3` agora) e media tempo de CPU com `clock()` em vez de tempo real.
+- 🟨 JavaScript agora conclui sem erro de memória no Node.js 21 e fica em cerca do dobro do tempo dos compilados.
+- 🧐 C++ ainda é compilado sem `-O` e usa `std::vector<bool>` (1 bit por número), o que explica o tempo alto. (Refactor??)
+- 💎 Ruby caiu de ~13,5 s para ~6,6 s trocando `Range#step` com bloco por laços `while` e rodando com `--yjit`.
+- 🐢 Python segue o mais lento, refletindo o custo do interpretador em laços puros.
 
 ---
 
