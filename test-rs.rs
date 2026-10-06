@@ -2,7 +2,7 @@ use std::time::Instant;
 
 fn main() {
     // Valor máximo
-    let max_value = 100_000_000;
+    let max_value: usize = 100_000_000;
 
     // Inicializando o vetor de números
     let mut numbers = vec![true; max_value + 1];
@@ -11,19 +11,18 @@ fn main() {
 
     // Medindo o tempo de execução
     let start_time = Instant::now();
-    let max_iter = max_value.isqrt();
-    (2..=max_iter).for_each(|i| {
+    for i in 2..=max_value.isqrt() {
         if numbers[i] {
-            numbers
-                .iter_mut()
-                .skip(i * i)
-                .step_by(i)
-                .for_each(|is_prime| *is_prime = false);
+            // Fatiar a partir de i*i evita percorrer o início do vetor
+            // e elimina a checagem de limites no laço interno
+            for is_prime in numbers[i * i..].iter_mut().step_by(i) {
+                *is_prime = false;
+            }
         }
-    });
+    }
     let duration = start_time.elapsed();
 
-    // Coletando os números primos
+    // Contando os números primos
     let primes_count = numbers.iter().filter(|&&is_prime| is_prime).count();
 
     // Imprimindo a quantidade de números primos encontrados e o tempo de execução
@@ -32,7 +31,7 @@ fn main() {
         max_value, primes_count
     );
     println!(
-        "Tempo de execução: {:?} milissegundos",
-        duration.as_millis()
+        "Tempo de execução: {:.2} milissegundos",
+        duration.as_secs_f64() * 1000.0
     );
 }

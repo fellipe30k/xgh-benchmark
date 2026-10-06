@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"time"
 )
 
@@ -19,27 +18,27 @@ func main() {
 
 	// Medindo o tempo de execução
 	startTime := time.Now()
-	for i := 2; i <= int(math.Sqrt(maxValue)); i++ {
+	for i := 2; i*i <= maxValue; i++ {
 		if numbers[i] {
-			for j := i * i; j <= maxValue; j += i {
-				numbers[j] = false
+			// Fatiar a partir de i*i permite ao compilador eliminar
+			// a checagem de limites no laço interno
+			multiples := numbers[i*i:]
+			for j := 0; j < len(multiples); j += i {
+				multiples[j] = false
 			}
 		}
 	}
-	endTime := time.Now()
+	elapsed := time.Since(startTime)
 
-	// Coletando os números primos
-	var primes []int
-	for i, isPrime := range numbers {
+	// Contando os números primos (sem alocar uma lista com todos eles)
+	primeCount := 0
+	for _, isPrime := range numbers {
 		if isPrime {
-			primes = append(primes, i)
+			primeCount++
 		}
 	}
 
-	// Calculando o tempo de execução em milissegundos
-	executionTimeMs := endTime.Sub(startTime).Milliseconds()
-
 	// Imprimindo a quantidade de números primos encontrados e o tempo de execução
-	fmt.Printf("Quantidade de números primos até %d: %d\n", maxValue, len(primes))
-	fmt.Printf("Tempo de execução: %d milissegundos\n", executionTimeMs)
+	fmt.Printf("Quantidade de números primos até %d: %d\n", maxValue, primeCount)
+	fmt.Printf("Tempo de execução: %.2f milissegundos\n", float64(elapsed.Nanoseconds())/1e6)
 }
